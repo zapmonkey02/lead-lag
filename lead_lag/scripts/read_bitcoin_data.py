@@ -1,14 +1,14 @@
 import warnings
 
-warnings.filterwarnings('ignore', message='numpy.dtype size changed')
-warnings.filterwarnings('ignore', message='numpy.ufunc size changed')
-
 import numpy as np
 import pandas as pd
 
+warnings.filterwarnings('ignore', message='numpy.dtype size changed')
+warnings.filterwarnings('ignore', message='numpy.ufunc size changed')
+
 
 def read_small_data(small_filename):
-    print(f'Reading {small_filename}')
+    # print(f'Reading {small_filename}')
     d = pd.read_csv(small_filename, parse_dates=True, index_col=0)
     d['timestamp'] = d.index.values.astype(np.int64) // 10 ** 7
     return d

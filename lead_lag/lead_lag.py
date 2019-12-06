@@ -48,7 +48,9 @@ class LeadLag:
             return None
         if np.std(self.contrasts) == 0.0:
             return None
-        return self.lag_range[np.argmax(self.contrasts)]
+
+        argmax_contrast = np.argmax(self.contrasts)
+        return self.lag_range[argmax_contrast], self.contrasts[argmax_contrast]
 
     @property
     def llr(self):
@@ -72,10 +74,16 @@ class LeadLag:
         df.set_index('LagRange', inplace=True)
         return df
 
-    def plot_results(self):
+    def plot_results(self, title=None, kind='line', x=None, y=None):
         import matplotlib.pyplot as plt
         if self.contrasts is not None:
-            self._contrasts_to_df().plot()
+            # self._contrasts_to_df().plot(kind=kind, x=x, y=y)
+            plt.scatter(self.lag_range, self.contrasts)
+            if title is not None:
+                plt.title(title)
+            plt.xlabel('Lag')
+            plt.ylabel('Cross-Correlation')
+            plt.legend([])
             plt.show()
 
     def plot_data(self, legend=None):
