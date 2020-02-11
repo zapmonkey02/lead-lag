@@ -73,7 +73,7 @@ class LeadLag:
         df.set_index('LagRange', inplace=True)
         return df
 
-    def plot_results(self, title=None, kind='line', x=None, y=None):
+    def plot_results(self, title=None, kind='line', x=None, y=None, file_name='figure1'):
         import matplotlib.pyplot as plt
         if self.contrasts is not None:
             # self._contrasts_to_df().plot(kind=kind, x=x, y=y)
@@ -83,9 +83,7 @@ class LeadLag:
             plt.xlabel('Lag')
             plt.ylabel('Cross-Correlation')
             plt.legend([])
-            fig, ax = plt.subplots()
-            fig.savefig('fig1.png')
-            plt.show()
+            plt.savefig(f"{file_name}.png")
 
     def plot_data(self, legend=None, date=None):
         import matplotlib.pyplot as plt
