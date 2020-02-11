@@ -17,13 +17,16 @@ class LeadLag:
                  specific_lags=None):
         self.contrasts = None
         # lead format format is also useful for plotting.
-        self.x, self.y, self.t_x, self.t_y, = convert_to_lead_lag_format(arr_1_with_ts, arr_2_with_ts)
+        self.x, self.y, self.t_x, self.t_y, = convert_to_lead_lag_format(
+            arr_1_with_ts, arr_2_with_ts)
         assert len(self.x) == len(self.y)
         if specific_lags is None:
-            self.lag_range = np.arange(-max_absolute_lag, max_absolute_lag + 1, 1)
+            self.lag_range = np.arange(-max_absolute_lag,
+                                       max_absolute_lag + 1, 1)
         else:
             if sorted(specific_lags) != specific_lags:
-                raise Exception('Make sure the lag list passed as argument is sorted.')
+                raise Exception(
+                    'Make sure the lag list passed as argument is sorted.')
             self.lag_range = np.array(specific_lags)
         self.inference_time = None
         self.cc = CrossCorrelationHY(self.x, self.y, self.t_x, self.t_y,
@@ -65,7 +68,8 @@ class LeadLag:
         self._contrasts_to_df().to_csv(path_or_buf=output_filename)
 
     def _contrasts_to_df(self):
-        df = pd.DataFrame(data=np.transpose([self.lag_range, self.contrasts]), columns=['LagRange', 'Contrast'])
+        df = pd.DataFrame(data=np.transpose(
+            [self.lag_range, self.contrasts]), columns=['LagRange', 'Contrast'])
         df.set_index('LagRange', inplace=True)
         return df
 
@@ -79,11 +83,13 @@ class LeadLag:
             plt.xlabel('Lag')
             plt.ylabel('Cross-Correlation')
             plt.legend([])
+            fig, ax = plt.subplots()
+            fig.savefig('fig1.png')
             plt.show()
 
-    def plot_data(self, legend=None):
+    def plot_data(self, legend=None, date=None):
         import matplotlib.pyplot as plt
-        plt.title('Non-synchronous data with leader / lagger relationship')
+        plt.title(f"Non-synchronous data with leader / lagger relationship — {date}")
         plt.xlabel('Time Axis (grid granularity)')
         plt.scatter(self.t_x, self.x[self.t_x], s=0.5, color='lime')
         plt.scatter(self.t_y, self.y[self.t_y], s=0.5, color='blue')
