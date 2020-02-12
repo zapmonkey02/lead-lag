@@ -84,6 +84,7 @@ class LeadLag:
             plt.ylabel('Cross-Correlation')
             plt.legend([])
             plt.savefig(f"{file_name}.png")
+            plt.show()
 
     def plot_data(self, legend=None, date=None):
         import matplotlib.pyplot as plt
