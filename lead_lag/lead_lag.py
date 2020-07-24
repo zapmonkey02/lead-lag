@@ -77,10 +77,11 @@ class LeadLag:
         import matplotlib.pyplot as plt
         if self.contrasts is not None:
             # self._contrasts_to_df().plot(kind=kind, x=x, y=y)
-            fig = plt.figure()
+            fig, ax = plt.subplots()
             fig.patch.set_facecolor('white')
+            ax.axvline(linestyle='dashed', color='black')
 
-            plt.scatter(self.lag_range * scale_factor, self.contrasts)
+            plt.scatter(self.lag_range * scale_factor, self.contrasts)            
 
             if title is not None:
                 plt.title(title)
@@ -92,7 +93,7 @@ class LeadLag:
                 plt.text(0.95, 0.5, f'Lead-Lag Time ({scale_label}): {max_lag * scale_factor}', transform=plt.gcf().transFigure)
             if llr is not None:
                 plt.text(0.95, 0.45, f'LLR: {llr}', transform=plt.gcf().transFigure)
-            plt.savefig(f"{file_name}.png")
+            plt.savefig(f"{file_name}.png", bbox_inches='tight')
             plt.show()
 
     def plot_data(self, legend=None, date=None):
