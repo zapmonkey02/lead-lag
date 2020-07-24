@@ -73,16 +73,25 @@ class LeadLag:
         df.set_index('LagRange', inplace=True)
         return df
 
-    def plot_results(self, title=None, kind='line', x=None, y=None, file_name='figure1'):
+    def plot_results(self, title=None, kind='line', x=None, y=None, file_name='figure1', scale_factor=1, scale_label='cs', max_lag=None, llr=None):
         import matplotlib.pyplot as plt
         if self.contrasts is not None:
             # self._contrasts_to_df().plot(kind=kind, x=x, y=y)
-            plt.scatter(self.lag_range, self.contrasts)
+            fig = plt.figure()
+            fig.patch.set_facecolor('white')
+
+            plt.scatter(self.lag_range * scale_factor, self.contrasts)
+
             if title is not None:
                 plt.title(title)
-            plt.xlabel('Lag')
+            
+            plt.xlabel(f"Lag ({scale_label})")
             plt.ylabel('Cross-Correlation')
             plt.legend([])
+            if max_lag is not None:
+                plt.text(0.95, 0.5, f'Lead-Lag Time ({scale_label}): {max_lag * scale_factor}', transform=plt.gcf().transFigure)
+            if llr is not None:
+                plt.text(0.95, 0.45, f'LLR: {llr}', transform=plt.gcf().transFigure)
             plt.savefig(f"{file_name}.png")
             plt.show()
 
