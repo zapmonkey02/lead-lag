@@ -80,7 +80,6 @@ class LeadLag:
             plt.rcParams["figure.figsize"] = [6, 4]
             fig, ax = plt.subplots()
             fig.patch.set_facecolor('white')
-            
 
             ax.axvline(linestyle='dashed', color='black', linewidth=0.75)
 
@@ -91,7 +90,7 @@ class LeadLag:
             
             plt.xlabel(f"Lag ({scale_label})")
             plt.ylabel('Cross-Correlation')
-            plt.legend([])
+            # plt.legend([])
             if max_lag is not None:
                 plt.text(0.95, 0.5, f'Lead-Lag Time ({scale_label}): {"{:.2f}".format(max_lag * scale_factor)}', transform=plt.gcf().transFigure)
             if llr is not None:
