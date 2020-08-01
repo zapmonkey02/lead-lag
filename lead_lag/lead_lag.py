@@ -96,8 +96,8 @@ class LeadLag:
             if llr is not None:
                 plt.text(0.95, 0.45, f'Lead-Lag Ratio: {"{:.2f}".format(llr)}', transform=plt.gcf().transFigure)
 
-            # plt.savefig(f"{file_name}.png", bbox_inches='tight')
-            plt.savefig(f"{file_name}.png")
+            plt.savefig(f"{file_name}.png", bbox_inches='tight')
+            # plt.savefig(f"{file_name}.png")
             plt.show()
 
     def plot_data(self, legend=None, date=None):
