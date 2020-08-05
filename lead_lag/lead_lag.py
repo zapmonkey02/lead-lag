@@ -83,7 +83,7 @@ class LeadLag:
 
             ax.axvline(linestyle='dashed', color='black', linewidth=0.75)
 
-            plt.scatter(self.lag_range * scale_factor, self.contrasts)            
+            plt.scatter(self.lag_range * scale_factor, self.contrasts, s=15)      
 
             if title is not None:
                 plt.title(title)
