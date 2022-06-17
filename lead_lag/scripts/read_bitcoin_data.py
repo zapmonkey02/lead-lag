@@ -5,7 +5,7 @@ import pandas as pd
 def read_small_data(small_filename):
     print(f'Reading {small_filename}')
     d = pd.read_csv(small_filename, parse_dates=True, index_col=0)
-    d['timestamp'] = d.index.values.astype(np.int64) // 10 ** 9
+    d['timestamp'] = d.index.values.astype(np.int64)
     return d
 
 
